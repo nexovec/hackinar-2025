@@ -2,3 +2,4 @@ streamlit
 plotly
 tinydb
 fastapi
+uvicorn

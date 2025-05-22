@@ -16,9 +16,11 @@ Existuje asi tak milion alternativ ke streamlitu, jako například Shiny v R. Fa
 
 Musíte mít nainstalovaný python. Já používám `uv` pro výběr verze pythonu a instalaci balíčků, ale všechno snad jde nainstalovat s pomocí `pip install -r requirements.txt`
 
-Dále musíte souběžně spou
+Dále musíte souběžně spustit backend(`uvicorn --reload backend:app`) a frontend(`streamlit run frontend.py`).
 
 ## Ukládání dat
+
+Ani jedna služba by neměla mít žádná interně sdílená data. Co se stane v endpointu, zůstane v endpointu, zbytek jde do databáze. Ukládejte jen to nejnutnější a snažte se neukládat nic, když to aplikace vysloveně nevyžaduje. Nebojte se ukládat do souboru.
 
 ## Tipy na závěr
 
@@ -29,10 +31,12 @@ Mějte připravený vzor aplikace, ať můžete už po prezentaci začít pracov
 Bylo by super, kdybyste za první ~2 hodiny měli rozhodnuto, co chcete dělat a měli již načtená data, ať vám mohou mentoři začít pomáhat.
 
 Místo energeťáků si dejte silný zelený čaj se zázvorem a ženšenem. Neslaďte, z cukru dostanete crash. Dejte si ho do velkého hrníčku, ať nemusíte každých 5 minut chodit do kuchyně. PIJTE HODNĚ a pravidelně, klidně mějte časovač, trapný to není. Pijte méně na začátku a více později.
-Pokud si musíte dát energeťák, udělejte to co nejdříve PO jídle.
+Pokud si musíte dát energeťák, udělejte to co nejdříve PO jídle. ABSOLUTNĚ ŽÁDNÝ ALKOHOL, nehodí se to ani pro soutěž, ani vzhledem k organizátorům.
 
 Pokud je to možné, nespěte v místnostech, kde je ruch a svítí tam počítače. Zakryjte si na spánek oči, miřte na cca 6 hodin spánku v obvyklých hodinách, ideálně 1-7.
 
+Mějte v každém bodě funkční program, nepřijďte na prezentaci s něčím, co nejde spustit. Kód vysdílejte veřejně.
+
 -----
 
-Z výše uvedených rad je jasné, že na hackathon se dá připravovat i dlouhodobě dopředu, brával jsem si s sebou nafukovací vak na spaní a polštář s dekou, půllitr, vlastní čaj, a dopředu jsem si upravil spací režim tak, abych vstal v poledne, a při začátku soutěže jsem pak měl v podstatě ráno... tak třeba příště.
+Z výše uvedených rad je jasné, že na hackathon se dá připravovat i dlouhodobě dopředu, brával jsem si s sebou nafukovací vak na spaní a polštář s dekou, půllitr, vlastní čaj, a dopředu jsem si upravil spací režim tak, abych vstal v poledne, a při začátku soutěže jsem pak měl v podstatě ráno, slabší jedinci si mohou obstarat melaton... tak třeba příště.
