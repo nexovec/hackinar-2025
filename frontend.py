@@ -40,5 +40,21 @@ if uploaded_file is not None:
     except requests.exceptions.RequestException as e:
         st.sidebar.error(f"Chyba při nahrávání souboru: {str(e)}")
 
+def show_debug_info():
+    try:
+        response = requests.get("http://localhost:8000/debug/all")
+        response.raise_for_status()
+        debug_data = response.json()
+        
+        st.subheader("Debug Information")
+        if debug_data:
+            for item in debug_data:
+                st.json(item)
+        else:
+            st.info("No debug data available")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error fetching debug data: {str(e)}")
+
 # zpracuj data
 st.sidebar.markdown(f"Továrna na jsoucno, chrám boží, v0.1")
+show_debug_info()
