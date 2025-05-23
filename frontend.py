@@ -1,4 +1,8 @@
 import streamlit as st
+import requests
+
+# API endpoint
+API_URL = "http://localhost:8000/api/files/upload"
 
 # pár konfiguračních věcí na začátek, v prezentaci přeskočíme
 streamlit_menu_items = {
@@ -17,6 +21,24 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.title("Zobraz data")
 st.sidebar.title("Navigace")
+
+# Náhradní část
+# File upload widget
+st.sidebar.markdown("### Upload souboru")
+uploaded_file = st.sidebar.file_uploader("Vyberte soubor", type=None)
+
+if uploaded_file is not None:
+    # Prepare the request
+    files = {"file": (uploaded_file.name, uploaded_file.getvalue())}
+    data = {"filename": uploaded_file.name.split(".")[0]}
+    
+    try:
+        response = requests.post(API_URL, files=files, data=data)
+        response.raise_for_status()
+        st.sidebar.success("Soubor úspěšně nahrán!")
+        st.sidebar.json(response.json())
+    except requests.exceptions.RequestException as e:
+        st.sidebar.error(f"Chyba při nahrávání souboru: {str(e)}")
 
 # zpracuj data
 st.sidebar.markdown(f"Továrna na jsoucno, chrám boží, v0.1")
