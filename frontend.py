@@ -57,7 +57,7 @@ def show_debug_info():
 
 def list_filenames():
     try:
-        response = requests.get("http://localhost:8000/api/file/list_filenames")
+        response = requests.get("http://localhost:8000/api/files/list_filenames")
         response.raise_for_status()
         data = response.json()
         
