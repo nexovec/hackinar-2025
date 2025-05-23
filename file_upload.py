@@ -55,8 +55,25 @@ async def upload_file(
 async def download_file(
     filename: str
 ):
-    ...
+    try:
+        # Verify file exists
+        file_record = db.search(Query().saved_filename == filename)
+        if not file_record:
+            raise HTTPException(status_code=404, detail="File not found")
+        
+        file_path = file_record[0]['file_path']
+        if not os.path.exists(file_path):
+            raise HTTPException(status_code=404, detail="File not found on disk")
+        
+        return FileResponse(file_path)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/list_filenames")
 async def list_filenames():
-    ...
+    try:
+        # Get all unique filenames from the database
+        filenames = list(set(record['saved_filename'] for record in db.all()))
+        return {"status": "success", "filenames": filenames}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
