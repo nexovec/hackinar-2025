@@ -72,8 +72,9 @@ async def download_file(
 @router.get("/list_filenames")
 async def list_filenames():
     try:
-        # Get all unique filenames from the database
-        filenames = list(set(record['saved_filename'] for record in db.all()))
+        # Get all unique filenames from uploads collection
+        uploads = db.search(Query().collection == 'uploads')
+        filenames = list({record['saved_filename'] for record in uploads})
         return {"status": "success", "filenames": filenames}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
