@@ -55,6 +55,22 @@ def show_debug_info():
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching debug data: {str(e)}")
 
+def list_filenames():
+    try:
+        response = requests.get("http://localhost:8000/api/file/list_filenames")
+        response.raise_for_status()
+        data = response.json()
+        
+        st.subheader("Uploaded Files")
+        if data:
+            for filename in data:
+                st.write(f"• {filename}")
+        else:
+            st.info("No files have been uploaded yet")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error fetching file list: {str(e)}")
+
 # zpracuj data
 st.sidebar.markdown(f"Továrna na jsoucno, chrám boží, v0.1")
 show_debug_info()
+list_filenames()
