@@ -16,7 +16,7 @@ Existuje asi tak milion alternativ ke streamlitu, jako například Shiny v R. Fa
 
 Musíte mít nainstalovaný python. Já používám `uv` pro výběr verze pythonu a instalaci balíčků, ale všechno snad jde nainstalovat s pomocí `pip install -r requirements.txt`
 
-Dále musíte souběžně spustit backend(`uvicorn --reload backend:app`) a frontend(`streamlit run frontend.py`).
+Dále musíte souběžně spustit backend(`uvicorn backend:app --reload`) a frontend(`streamlit run frontend.py`).
 
 ## Ukládání dat
 
