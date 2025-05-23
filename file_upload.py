@@ -1,7 +1,9 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
+from fastapi.responses import FileResponse
 import os
 from datetime import datetime
 from pathlib import Path
+from tinydb import Query
 from tinydb_setup import db
 
 router = APIRouter()
