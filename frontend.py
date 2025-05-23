@@ -89,9 +89,25 @@ def list_filenames():
                     st.write("Data Preview:")
                     st.dataframe(df.head())
                     
-                    # Create interactive plot
-                    fig = px.line(df, title=f"Visualization of {selected}")
-                    st.plotly_chart(fig)
+                    # Let user select columns
+                    cols = df.columns.tolist()
+                    if cols:
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            x_col = st.selectbox("X Axis", options=cols, index=0)
+                        with col2:
+                            y_col = st.selectbox("Y Axis", options=cols, index=min(1, len(cols)-1))
+                        
+                        # Create interactive plot with selected columns
+                        try:
+                            fig = px.line(df, x=x_col, y=y_col, 
+                                        title=f"{y_col} vs {x_col} in {selected}",
+                                        labels={x_col: x_col, y_col: y_col})
+                            st.plotly_chart(fig)
+                        except Exception as plot_error:
+                            st.error(f"Error creating plot: {str(plot_error)}")
+                    else:
+                        st.error("No columns found in the CSV file")
                     
                 except Exception as e:
                     st.error(f"Error processing CSV: {str(e)}")
