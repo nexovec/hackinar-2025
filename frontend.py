@@ -69,6 +69,15 @@ def list_filenames():
                 index=0,
                 help="Choose a file to work with"
             )
+            
+            # Download and display selected file
+            try:
+                response = requests.get(f"http://localhost:8000/api/files/download/{selected}")
+                response.raise_for_status()
+                st.subheader("File Content")
+                st.code(response.content.decode('utf-8'), language='text')
+            except requests.exceptions.RequestException as e:
+                st.error(f"Error downloading file: {str(e)}")
         else:
             st.warning("No files uploaded yet")
     except requests.exceptions.RequestException as e:
