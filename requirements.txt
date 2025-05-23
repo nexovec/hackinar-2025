@@ -3,3 +3,4 @@ plotly
 tinydb
 fastapi
 uvicorn
+python-multipart
