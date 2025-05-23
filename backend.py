@@ -25,3 +25,8 @@ app.include_router(config_router, prefix="/api/graph", tags=["graph_config"])
 @app.get("/")
 def read_root():
     return {"message": "FastAPI File Upload and Graph Configuration Service"}
+
+@app.get("/debug/all")
+async def debug_all():
+    from tinydb_setup import db
+    return db.all()
