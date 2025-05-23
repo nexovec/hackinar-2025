@@ -1,5 +1,8 @@
 import streamlit as st
 import requests
+import pandas as pd
+import plotly.express as px
+import io
 
 # API endpoint
 API_URL = "http://localhost:8000/api/files/upload"
@@ -76,6 +79,22 @@ def list_filenames():
                 response.raise_for_status()
                 st.subheader("File Content")
                 st.code(response.content.decode('utf-8'), language='text')
+                
+                # Load CSV into pandas and display with Plotly
+                try:
+                    df = pd.read_csv(io.StringIO(response.content.decode('utf-8')))
+                    st.subheader("CSV Data Visualization")
+                    
+                    # Show dataframe preview
+                    st.write("Data Preview:")
+                    st.dataframe(df.head())
+                    
+                    # Create interactive plot
+                    fig = px.line(df, title=f"Visualization of {selected}")
+                    st.plotly_chart(fig)
+                    
+                except Exception as e:
+                    st.error(f"Error processing CSV: {str(e)}")
             except requests.exceptions.RequestException as e:
                 st.error(f"Error downloading file: {str(e)}")
         else:
