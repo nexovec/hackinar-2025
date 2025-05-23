@@ -22,6 +22,15 @@ Dále musíte souběžně spustit backend(`uvicorn backend:app --reload`) a fron
 
 Ani jedna služba by neměla mít žádná interně sdílená data. Co se stane v endpointu, zůstane v endpointu, zbytek jde do databáze. Ukládejte jen to nejnutnější a snažte se neukládat nic, když to aplikace vysloveně nevyžaduje. Nebojte se ukládat do souboru.
 
+## Osnova
+
+- Přečtu vám README.
+- Představím vám streamlit.
+- Představím vám fastapi.
+- Ukážu vám dokumentaci.
+- Předvedu vám technologická omezení streamlitu a jak ho obejít.
+- Naimplementujeme něco do frontendu.
+
 ## Poznámky
 
 V repozitáři [streamlit-workshop](https://github.com/nexovec/streamlit-workshop/blob/master/frontend/__main__.py) je ukázka routování pro streamlit pro složitější stránky ve streamlitu.
