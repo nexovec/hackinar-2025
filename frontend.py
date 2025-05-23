@@ -62,7 +62,15 @@ def list_filenames():
         data = response.json()
         
         st.subheader("Uploaded Files")
-        st.json(data)
+        if data['filenames']:
+            selected = st.selectbox(
+                "Select an uploaded file",
+                data['filenames'],
+                index=0,
+                help="Choose a file to work with"
+            )
+        else:
+            st.warning("No files uploaded yet")
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching file list: {str(e)}")
 
