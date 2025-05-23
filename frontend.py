@@ -25,10 +25,10 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.title("Zobraz data")
 st.sidebar.title("Navigace")
 
-# Náhradní část
-# File upload widget
+# sidebar
 st.sidebar.markdown("### Upload souboru")
 uploaded_file = st.sidebar.file_uploader("Vyberte soubor", type=None)
+st.sidebar.markdown(f"Továrna na jsoucno, chrám boží, v0.1")
 
 if uploaded_file is not None:
     # Prepare the request
@@ -97,10 +97,9 @@ def list_filenames():
                             x_col = st.selectbox("X Axis", options=cols, index=0)
                         with col2:
                             y_col = st.selectbox("Y Axis", options=cols, index=min(1, len(cols)-1))
-                        
                         # Create interactive plot with selected columns
                         try:
-                            fig = px.line(df, x=x_col, y=y_col, 
+                            fig = px.scatter(df, x=x_col, y=y_col, 
                                         title=f"{y_col} vs {x_col} in {selected}",
                                         labels={x_col: x_col, y_col: y_col})
                             st.plotly_chart(fig)
@@ -119,6 +118,6 @@ def list_filenames():
         st.error(f"Error fetching file list: {str(e)}")
 
 # zpracuj data
-st.sidebar.markdown(f"Továrna na jsoucno, chrám boží, v0.1")
-show_debug_info()
+if st.sidebar.button("Show all database contents"):
+    show_debug_info()
 list_filenames()
