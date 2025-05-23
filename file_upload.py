@@ -59,7 +59,7 @@ async def download_file(
 ):
     try:
         # Verify file exists
-        file_record = db.search(Query().saved_filename == filename)
+        file_record = db.search(Query().filename == filename)
         if not file_record:
             raise HTTPException(status_code=404, detail="File not found")
         
@@ -76,7 +76,7 @@ async def list_filenames():
     try:
         # Get all unique filenames from uploads collection
         uploads = db.search(Query().collection == 'uploads')
-        filenames = list({record['saved_filename'] for record in uploads})
+        filenames = list({record['filename'] for record in uploads})
         return {"status": "success", "filenames": filenames}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

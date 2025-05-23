@@ -62,11 +62,7 @@ def list_filenames():
         data = response.json()
         
         st.subheader("Uploaded Files")
-        if data:
-            for filename in data:
-                st.write(f"• {filename}")
-        else:
-            st.info("No files have been uploaded yet")
+        st.json(data)
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching file list: {str(e)}")
 
